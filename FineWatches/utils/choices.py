@@ -6,6 +6,7 @@ DATASET_PATH = 'C:/Users/oliko/OneDrive/Dokumenter/GitHub/FineTimeWear/FineWatch
 def get_label_name(string):
     return string.replace("_", " ").capitalize()
 
+
 class ModelChoices:
     def __init__(self, choices_list):
         for item in choices_list:
