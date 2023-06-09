@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>FineTime Wear Design</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<section class="sub-header_rolex">
+    <nav>
+        <a href="index.html"><img src="images/FineTime Wear.png"></a>
+        <div class="nav-links" id="navLinks">
+            <i class="fa fa-times"onclick="hideMenu()"></i>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="collection.html">PRODUCTS</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <h1>ROLEX</h1>
+</section>
+
+<!------- Designs ------->
+<section class="About">
+    <h1>Iconic Mastery: Rolex Defines the Art of Swiss Watchmaking</h1>
+    <p>Rolex, the legendary Swiss watchmaker, has established itself as a global icon of prestige and precision since its inception in 1905. <br>
+        Renowned for its exceptional quality and timeless design, Rolex watches are revered for their unrivaled craftsmanship and reliability. <br>
+        Each timepiece undergoes meticulous attention to detail, from the selection of the finest materials to the precision assembly of its intricate components. <br><br>
+
+        With a legacy deeply rooted in exploration, Rolex watches have accompanied adventurers to the highest peaks and the deepest depths of the Earth. <br>
+        From scaling Mount Everest to exploring the depths of the ocean, Rolex timepieces have proven <br>
+        their unwavering durability and accuracy in the most challenging environments. <br><br>
+        
+        Beyond their technical excellence, Rolex watches embody a sense of style and sophistication that transcends generations. <br>
+        The brand's iconic designs have become enduring symbols of success and refinement, gracing the wrists of influential individuals across the globe. <br><br>
+        
+        A pioneer in watchmaking innovation, Rolex has introduced numerous groundbreaking advancements, including the first <br>
+        waterproof wristwatch and the world's first self-winding mechanism. Continually pushing the boundaries of horological excellence, <br>
+        Rolex remains at the forefront of innovation while upholding its timeless aesthetic. <br><br>
+        
+        With an unwavering commitment to precision, craftsmanship, and elegance, Rolex stands as a true testament to the art of Swiss watchmaking, <br>
+        capturing the hearts of watch enthusiasts and collectors worldwide.</p>
+
+    <div class="row">
+        <div class="About-col">
+            <img src="images/rolex-daytona.jpg">
+            <div class="layer">
+                <h3>DAYTONA</h3>
+            </div>
+        </div>
+        <div class="About-col">
+            <img src="images/daydate.jpg">
+            <div class="layer2">
+                <h3>DAYDATE</h3>
+            </div>
+        </div>
+        <div class="About-col">
+            <img src="images/rolex-submariner.jpg">
+            <div class="layer3">
+                <h3>SUBMARINER</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!----- Footer --------->
+
+<section class="footer">
+    <h4>About Us</h4>
+    <p>FineTime Wear is a watch company located Denmark. <br>
+    The company was founded on three core values: <br>
+    Delivering high-quality watches. <br>
+    Having good and honest customer service. <br>
+    Giving back to the community around us. <br>
+    </p>
+    <div class="icons">
+        <i class="fa fa-facebook"></i>
+        <i class="fa fa-twitter"></i>
+        <i class="fa fa-instagram"></i>
+        <i class="fa fa-linkedin"></i>
+    </div>
+    <p>Made with <i class=" fa fa-heart-o"></i> By FineTime Wear</p>
+
+</section>
+
+</section>
+
+
+<!--------JavaScript for Toggle Menu------->
+<script>
+
+    var navLinks = document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right = "0";
+    }
+    function hideMenu(){
+        navLinks.style.right = "-200px";
+    }
+</script>
+
+</body>
+</html>

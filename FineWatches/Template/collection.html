@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>FineTime Wear Design</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<section class="sub-header">
+    <nav>
+        <a href="index.html"><img src="images/FineTime Wear.png"></a>
+        <div class="nav-links" id="navLinks">
+            <i class="fa fa-times"onclick="hideMenu()"></i>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="collection.html">PRODUCTS</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <h1>Products</h1>
+</section>
+    
+<!------- Designs ------->
+<section class="About">
+    <h1>FineTime Wear: Elevating Timekeeping to a Luxurious Art</h1>
+    <p>Step into the world of timeless elegance and exquisite craftsmanship with FineTime Wear, the leading purveyor of luxury watches. <br>
+        With an unwavering commitment to excellence, FineTime Wear has established itself as a premier destination <br> 
+        for horological connoisseurs seeking the epitome of refinement and style <br></p>
+
+    <div class="row">
+        <div class="About-col">
+            <img src="images/omega.png">
+            <div class="layer">
+                <h3>OMEGA</h3>
+            </div>
+        </div>
+        <div class="About-col">
+            <img src="images/Patek.png">
+            <div class="layer2">
+                <a href="patek.html"><h3>PATEK</h3></a>
+            </div>
+        </div>
+        <div class="About-col">
+            <img src="images/rolex-daydate2.jpg">
+            <div class="layer3">
+                <a href="rolex.html"><h3>ROLEX</h3></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!----- Footer --------->
+
+<section class="footer">
+    <h4>About Us</h4>
+    <p>FineTime Wear is a watch company located Denmark. <br>
+    The company was founded on three core values: <br>
+    Delivering high-quality watches. <br>
+    Having good and honest customer service. <br>
+    Giving back to the community around us. <br>
+    </p>
+    <div class="icons">
+        <i class="fa fa-facebook"></i>
+        <i class="fa fa-twitter"></i>
+        <i class="fa fa-instagram"></i>
+        <i class="fa fa-linkedin"></i>
+    </div>
+    <p>Made with <i class=" fa fa-heart-o"></i> By FineTime Wear</p>
+
+</section>
+
+</section>
+
+
+<!--------JavaScript for Toggle Menu------->
+<script>
+
+    var navLinks = document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right = "0";
+    }
+    function hideMenu(){
+        navLinks.style.right = "-200px";
+    }
+</script>
+
+</body>
+</html>

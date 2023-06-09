@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>FineTime Wear Design</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<section class="sub-header_omega">
+    <nav>
+        <a href="index.html"><img src="images/FineTime Wear.png"></a>
+        <div class="nav-links" id="navLinks">
+            <i class="fa fa-times"onclick="hideMenu()"></i>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="collection.html">PRODUCTS</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <h1>OMEGA</h1>
+</section>
+
+<!------- Designs ------->
+<section class="About">
+    <h1>Unrivaled Heritage: Omega's Timekeeping Legacy Shines Bright</h1>
+    <p>Omega, the esteemed Swiss watchmaker, has carved an indelible mark in the realm of horology since its inception in 1848. <br>
+        With a rich heritage spanning over a century, Omega has become synonymous with precision, innovation, and enduring style.<br><br>
+
+        Renowned for its impeccable timekeeping, Omega has been the official timekeeper of the Olympic Games for decades, embodying the brand's <br>
+        commitment to accuracy and excellence. From the first chronograph to be worn on the moon during the Apollo missions <br>
+        to the cutting-edge Co-Axial escapement system, Omega continuously pushes the boundaries of technical achievement. <br><br>
+        
+        Beyond its technical prowess, Omega has established itself as an icon of elegance and sophistication. <br>
+        The brand's timeless designs effortlessly blend classic aesthetics with contemporary flair, gracing the wrists of <br>
+        discerning individuals around the world. From the iconic Speedmaster and Seamaster collections to the refined <br>
+        Constellation line, Omega offers a diverse range of timepieces to suit every style and occasion.<br><br>
+        
+        Omega's dedication to quality craftsmanship is evident in every detail. Each watch undergoes rigorous testing and meticulous assembly, <br>
+        ensuring utmost reliability and durability. The brand's unwavering commitment to excellence has earned <br>
+        Omega numerous accolades and a loyal following among watch enthusiasts and collectors alike.<br><br>
+        
+        Embracing innovation while honoring its rich heritage, Omega seamlessly merges tradition with cutting-edge technology. <br>
+        With advancements in materials, movements, and design, Omega continues to shape the future of watchmaking while preserving its timeless legacy.<br><br>
+        
+        In a world where time is of the essence, Omega stands as a shining beacon of precision, style, and enduring quality, <br>
+        captivating watch connoisseurs with its remarkable timepieces for generations to come.</p>
+
+    <div class="row">
+        <div class="About-col">
+            <img src="images/omega3.jpg">
+            <div class="layer">
+                <h3></h3>
+            </div>
+        </div>
+        <div class="About-col">
+            <img src="images/omega4.jpg">
+            <div class="layer2">
+                <h3></h3>
+            </div>
+        </div>
+        <div class="About-col">
+            <img src="images/omega5.jpg">
+            <div class="layer3">
+                <h3></h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!----- Footer --------->
+
+<section class="footer">
+    <h4>About Us</h4>
+    <p>FineTime Wear is a watch company located Denmark. <br>
+    The company was founded on three core values: <br>
+    Delivering high-quality watches. <br>
+    Having good and honest customer service. <br>
+    Giving back to the community around us. <br>
+    </p>
+    <div class="icons">
+        <i class="fa fa-facebook"></i>
+        <i class="fa fa-twitter"></i>
+        <i class="fa fa-instagram"></i>
+        <i class="fa fa-linkedin"></i>
+    </div>
+    <p>Made with <i class=" fa fa-heart-o"></i> By FineTime Wear</p>
+
+</section>
+
+</section>
+
+
+<!--------JavaScript for Toggle Menu------->
+<script>
+
+    var navLinks = document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right = "0";
+    }
+    function hideMenu(){
+        navLinks.style.right = "-200px";
+    }
+</script>
+
+</body>
+</html>
