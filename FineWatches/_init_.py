@@ -67,5 +67,4 @@ from GreenGroceries.blueprints.Produce.routes import Produce
 
 app.register_blueprint(Login)
 app.register_blueprint(Produce)
-asdf
 
