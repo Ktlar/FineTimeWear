@@ -42,7 +42,7 @@ from flask_login import login_required, current_user
 
 from FineWatches.forms import FilterProduceForm, AddProduceForm, BuyProduceForm, RestockProduceForm
 from FineWatches.models import Watch as WatchModel, WatchOrder
-from FineWatches.queries import insert_watch, get_watch_by_id, Sell, \
+from FineWatches.queries import insert_watch, get_watch_by_pk, Sell, \
     insert_sell, get_all_produce_by_farmer, get_produce_by_filters, insert_produce_order, update_sell, \
     get_orders_by_customer_pk
 
