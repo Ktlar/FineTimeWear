@@ -20,7 +20,7 @@ python app.py
 This will start the Flask development server, and you should see output indicating that the server is running. 
 You can then access the application by visiting the provided URL in a web browser """
 
-from GreenGroceries import app
+from FineWatches import app
 
 if __name__ == '__main__':
     app.run(debug=True)
