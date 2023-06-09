@@ -30,10 +30,10 @@ Overall, routes.py defines the routes and view functions for the different pages
 from flask import render_template, url_for, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user
 
-from GreenGroceries.forms import UserLoginForm, UserSignupForm
-from GreenGroceries.models import Farmer, Customer
-from GreenGroceries.queries import get_user_by_user_name, insert_farmer, insert_customer
-from GreenGroceries.utils.choices import UserTypeChoices
+from FineWatches.forms import UserLoginForm, UserSignupForm
+from FineWatches.models import BrandRep, Customer
+from FineWatches.queries import get_user_by_user_name, insert_brandrep, insert_customer
+from FineWatches.utils.choices import UserTypeChoices
 
 Login = Blueprint('Login', __name__)
 
@@ -80,8 +80,8 @@ def signup():
                              user_name=form.user_name.data,
                              password=form.password.data)
             if form.user_type.data == UserTypeChoices.values()[0]:
-                farmer = Farmer(user_data)
-                insert_farmer(farmer)
+                brandrep = BrandRep(user_data)
+                insert_brandrep(brandrep)
             elif form.user_type.data == UserTypeChoices.values()[1]:
                 customer = Customer(form.data)
                 insert_customer(customer)
