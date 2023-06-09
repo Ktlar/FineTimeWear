@@ -152,9 +152,9 @@ class Watch:
         self.brand = brand
         self.model = model
         self.specification = caseMaterial
-        self.strapmaterial = strapMaterial
-        self.strapmaterial = waterResistance
-        self.strapmaterial = price
+        self.strapMaterial = strapMaterial
+        self.waterResistance = waterResistance
+        self.price = price
 
 # Function to establish a connection with the database
 def create_connection():

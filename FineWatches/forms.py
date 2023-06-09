@@ -1,73 +1,13 @@
-"""The forms.py file contains several Flask forms that are used for user input validation and rendering 
-in the GreenGroceries web application. Let's go through each form and explain its purpose and fields:
-
-UserLoginForm:
-
-Purpose: This form is used for user login.
-Fields:
-user_name: StringField to enter the username.
-password: PasswordField to enter the password.
-submit: SubmitField to submit the login form.
-Validation:
-validate_password: Validates the entered password against the user's stored password in the database.
-UserSignupForm:
-
-Purpose: This form is used for user registration.
-Fields:
-full_name: StringField to enter the user's full name.
-user_name: StringField to enter the username.
-password: PasswordField to enter the password.
-password_repeat: PasswordField to repeat and confirm the password.
-user_type: SelectField to choose the user type.
-submit: SubmitField to submit the signup form.
-Validation:
-validate_user_name: Validates that the entered username is not already in use.
-validate_password_repeat: Validates that the entered passwords match.
-FilterProduceForm:
-
-Purpose: This form is used for filtering produce items.
-Fields:
-category: SelectField to choose the produce category for filtering.
-item: SelectField to choose the produce item (subcategory) for filtering.
-variety: SelectField to choose the produce variety for filtering.
-sold_by: StringField to enter the name of the seller for filtering.
-price: FloatField to enter the maximum price for filtering.
-submit: SubmitField to submit the filter form.
-AddProduceForm:
-
-Purpose: This form is used for adding produce items.
-Fields:
-category: SelectField to choose the produce category.
-item: SelectField to choose the produce item (subcategory).
-variety: SelectField to choose the produce variety.
-unit: SelectField to choose the produce unit.
-price: IntegerField to enter the produce price.
-farmer_pk: IntegerField (disabled) to display the farmer's primary key.
-submit: SubmitField to submit the add produce form.
-Validation:
-validate_price: Validates that the entered price is within a specific range based on the farmer's primary key.
-BuyProduceForm:
-
-Purpose: This form is used for confirming the purchase of produce.
-Fields:
-submit: SubmitField to confirm the purchase.
-Validation:
-validate_submit: Validates that the current user is a customer before allowing the purchase.
-RestockProduceForm:
-
-Purpose: This form is used for confirming the restocking of produce.
-Fields:
-submit: SubmitField to confirm the restocking.
-These forms provide a way to handle user input, perform validation checks, 
-and render the necessary fields in the corresponding Flask views or templates within the GreenGroceries web application."""
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, IntegerField, SelectField, FloatField
 from wtforms.validators import DataRequired, Length, ValidationError, NumberRange
 
-from GreenGroceries.queries import get_user_by_user_name, get_farmer_by_pk, get_customer_by_pk
-from GreenGroceries.utils.choices import ProduceItemChoices, ProduceCategoryChoices, UserTypeChoices, \
-    ProduceVarietyChoices, ProduceUnitChoices
+from FineWatches.queries import get_user_by_user_name, get_brandrep_by_pk, get_customer_by_pk
+from FineWatches.utils.choices import WatchModelChoices, WatchBrandChoices, UserTypeChoices, \
+    WatchCaseMaterialChoices, WatchStrapMaterialChoices, WatchMovementTypeChoices, WatchWaterResistanceChoices, \
+    WatchCaseDiameterChoices, WatchCaseThicknessChoices, WatchBandWidthChoices, WatchDialColorChoices, \
+    WatchCrystalMaterialChoices, WatchComplicationChoices, WatchPowerReserveChoices
 
 
 class UserLoginForm(FlaskForm):
@@ -115,55 +55,79 @@ class UserSignupForm(FlaskForm):
             raise ValidationError(f'Provided passwords do not match.')
 
 
-class FilterProduceForm(FlaskForm):
-    category = SelectField('Category',
-                           choices=ProduceCategoryChoices.choices())
-    item = SelectField('Item',
-                       choices=ProduceItemChoices.choices())
-    variety = SelectField('Variety',
-                          choices=ProduceVarietyChoices.choices())
+class FilterWatchForm(FlaskForm):
+    category = SelectField('Brand',
+                           choices=WatchBrandChoices.choices())
+    item = SelectField('Model',
+                       choices=WatchModelChoices.choices())
     sold_by = StringField('Sold by')
     price = FloatField('Price (lower than or equal to)',
-                       validators=[NumberRange(min=0, max=100)])
-
+                       validators=[NumberRange(min=0, max=100000)])
     submit = SubmitField('Filter')
 
 
-class AddProduceForm(FlaskForm):
-    category = SelectField('Category',
-                           validators=[DataRequired()],
-                           choices=ProduceCategoryChoices.choices())
-    item = SelectField('Item (Subcategory)',
+class AddWatchForm(FlaskForm):
+    category = SelectField('Brand',
+                        validators=[DataRequired()],
+                        choices=WatchBrandChoices.choices())
+    item = SelectField('Model',
                        validators=[DataRequired()],
-                       choices=ProduceItemChoices.choices())
-    variety = SelectField('Variety',
+                       choices=WatchModelChoices.choices())
+    variety = SelectField('Case material',
                           validators=[DataRequired()],
-                          choices=ProduceVarietyChoices.choices())
-    unit = SelectField('Unit',
+                          choices=WatchCaseMaterialChoices.choices())
+    unit = SelectField('Strap material',
                        validators=[DataRequired()],
-                       choices=ProduceUnitChoices.choices())
+                       choices=WatchStrapMaterialChoices.choices())
+    unit = SelectField('Water resistance',
+                       validators=[DataRequired()],
+                       choices=WatchWaterResistanceChoices.choices())
+    unit = SelectField('Movement type',
+                       validators=[DataRequired()],
+                       choices=WatchMovementTypeChoices.choices())
+    unit = SelectField('Case diameter',
+                       validators=[DataRequired()],
+                       choices=WatchCaseDiameterChoices.choices())
+    unit = SelectField('Case thickness',
+                       validators=[DataRequired()],
+                       choices=WatchCaseThicknessChoices.choices())
+    unit = SelectField('Band width',
+                       validators=[DataRequired()],
+                       choices=WatchBandWidthChoices.choices())
+    unit = SelectField('Dial Color',
+                       validators=[DataRequired()],
+                       choices=WatchDialColorChoices.choices())
+    unit = SelectField('Crystal material',
+                       validators=[DataRequired()],
+                       choices=WatchCrystalMaterialChoices.choices())
+    unit = SelectField('Complications',
+                       validators=[DataRequired()],
+                       choices=WatchComplicationChoices.choices())
+    unit = SelectField('Power reserve',
+                       validators=[DataRequired()],
+                       choices=WatchPowerReserveChoices.choices())
     price = IntegerField('Price',
-                         validators=[DataRequired(), NumberRange(min=0, max=100)])
-    farmer_pk = IntegerField('Farmer',
+                         validators=[DataRequired(), NumberRange(min=0, max=100000)])
+    brandrep = IntegerField('Brand representative',
                              validators=[DataRequired()],
                              render_kw=dict(disabled='disabled'))
-    submit = SubmitField('Add produce')
+    submit = SubmitField('Add watch')
+
 
     def validate_price(self, field):
-        farmer = get_farmer_by_pk(self.farmer_pk.data)
+        farmer = get_brandrep_by_pk(self.brandrep_pk.data)
         if farmer is None:
-            raise ValidationError("You need to be a farmer to sell produce!")
+            raise ValidationError("You need to be an established brand to sell watches here")
 
 
-class BuyProduceForm(FlaskForm):
-    submit = SubmitField('Yes, buy it')
+class BuyWatchForm(FlaskForm):
+    submit = SubmitField('Buy')
 
     def validate_submit(self, field):
         customer = get_customer_by_pk(current_user.pk)
         if not customer:
-            raise ValidationError("You must be a customer in order to create orders.")
-
+            raise ValidationError("You need to be a customer buy watches.")
 
 class RestockProduceForm(FlaskForm):
-    submit = SubmitField('Yes, restock it')
+    submit = SubmitField('Restock')
 
