@@ -148,11 +148,12 @@ import sqlite3
 
 # Watch model class
 class Watch:
-    def __init__(self, id, brand, model, specification, price):
-        self.id = id
+    def __init__(self, brand, model, caseMaterial, strapMaterial, waterResistance, price):
         self.brand = brand
         self.model = model
-        self.specification = specification
+        self.specification = caseMaterial
+        self.strapMaterial = strapMaterial
+        self.waterResistance = waterResistance
         self.price = price
 
 # Function to establish a connection with the database
@@ -173,7 +174,7 @@ def get_all_watches():
         cursor = conn.execute("SELECT * FROM watches")
         watches = []
         for row in cursor.fetchall():
-            watch = Watch(row[0], row[1], row[2], row[3], row[4])
+            watch = Watch(row[1], row[2], row[3], row[4], row[6], row[14])
             watches.append(watch)
         return watches
     except sqlite3.Error as e:
@@ -188,7 +189,7 @@ def get_watch_by_id(watch_id):
         cursor = conn.execute("SELECT * FROM watches WHERE id = ?", (watch_id,))
         row = cursor.fetchone()
         if row:
-            watch = Watch(row[0], row[1], row[2], row[3], row[4])
+            watch = Watch(row[1], row[2], row[3], row[4], row[6], row[14])
             return watch
         else:
             return None
