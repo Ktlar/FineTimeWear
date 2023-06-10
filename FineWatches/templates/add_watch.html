@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="with=device-width, initial-scale=1.0">
+        <title>FineTime Wear Design</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+<body>
+  <!-- Header -->
+  <section class="sub-header">
+    <nav>
+        <a href="index.html"><img src="images/FineTime Wear.png"></a>
+        <div class="nav-links" id="navLinks">
+            <i class="fa fa-times"onclick="hideMenu()"></i>
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="collection.html">PRODUCTS</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="add_watch.html">CART</a></li>
+            </ul>
+        </div>
+        <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <h1>Add Watch</h1>
+</section>
+  <!-- Main Content -->
+  <section class="content-section">
+    <h1>Add Watch</h1>
+    <form action="#" method="POST">
+      <label for="watchName">Watch Name:</label>
+      <input type="text" id="watchName" name="watchName" required>
+
+      <label for="watchBrand">Brand:</label>
+      <input type="text" id="watchBrand" name="watchBrand" required>
+
+      <label for="watchPrice">Price:</label>
+      <input type="number" id="watchPrice" name="watchPrice" required>
+      <form action="add_watch.html">
+     <input type="submit" value="Add Watch" class="button">
+      </form>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <section class="footer">
+    <h4>About Us</h4>
+    <p>FineTime Wear is a watch company located in Denmark. <br>
+    The company was founded on three core values: <br>
+    Delivering high-quality watches. <br>
+    Having good and honest customer service. <br>
+    Giving back to the community around us. <br>
+    </p>
+    <div class="icons">
+        <i class="fa fa-facebook"></i>
+        <i class="fa fa-twitter"></i>
+        <i class="fa fa-instagram"></i>
+        <i class="fa fa-linkedin"></i>
+    </div>
+    <p>Made with <i class=" fa fa-heart-o"></i> By FineTime Wear</p>
+</section>
+<!--------JavaScript for Toggle Menu------->
+<script>
+
+    var navLinks = document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right = "0";
+    }
+    function hideMenu(){
+        navLinks.style.right = "-200px";
+    }
+</script>
+</body>
+</html>
