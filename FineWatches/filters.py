@@ -3,7 +3,7 @@
    from the GreenGroceries module. It suggests that the Flask application is defined in a file named GreenGroceries.py
      or a package named GreenGroceries. """
 
-from Projectwatches import app
+from FineWatches import app
 
 
 @app.template_filter('format_data')
