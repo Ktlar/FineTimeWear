@@ -128,6 +128,6 @@ class BuyWatchForm(FlaskForm):
         if not customer:
             raise ValidationError("You need to be a customer buy watches.")
 
-class RestockProduceForm(FlaskForm):
+class RestockWatchForm(FlaskForm):
     submit = SubmitField('Restock')
 
