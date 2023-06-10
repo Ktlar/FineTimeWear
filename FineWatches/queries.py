@@ -104,13 +104,13 @@ def get_watches_by_filters(brand=None, model=None,
     """
     conditionals = []
     if brand:
-        conditionals.append(f"category='{brand}'")
+        conditionals.append(f"brand='{brand}'")
     if model:
         conditionals.append(f"model='{model}'")
     if brandrep_pk:
         conditionals.append(f"brandrep_pk = '{brandrep_pk}'")
     if brandrep_name:
-        conditionals.append(f"farmer_name LIKE '%{brandrep_name}%'")
+        conditionals.append(f"brandrep_name LIKE '%{brandrep_name}%'")
     if price:
         conditionals.append(f"price <= {price}")
 
