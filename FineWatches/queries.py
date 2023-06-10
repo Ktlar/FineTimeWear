@@ -1,5 +1,6 @@
 from FineWatches import db_cursor, conn
-from FineWatches import User, BrandRep, Customer, Watches, Sell, WatchOrder
+from FineWatches.models import User, BrandRep, Customer, Watches, Sell, WatchOrder
+
 
 # INSERT QUERIES
 def insert_user(user: User):
@@ -166,7 +167,7 @@ def get_all_watches():
     SELECT watches_pk as pk, brand, model, "Case Material", "Strap Material", "Movement Type",
     "Water Resistance","Case Diameter","Case Thickness","Band Width","Dial Color","Crystal Material",
     Complications,"Power Reserve",price, brandrep_name, available, brandrep_pk
-    FROM vw_waches
+    FROM vw_watches
     ORDER BY available DESC, price
     """
     db_cursor.execute(sql)

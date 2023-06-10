@@ -2,7 +2,7 @@ from flask import render_template, request, Blueprint
 from flask_login import login_required, current_user
 
 from FineWatches.forms import FilterWatchForm, AddWatchForm, BuyWatchForm, RestockWatchForm
-from FineWatches.models import Watch as WatchModel, WatchOrder
+from FineWatches.models import Watches as WatchModel, WatchOrder
 from FineWatches.queries import insert_watch, get_watches_by_pk, Sell, \
     insert_sell, get_all_watches_by_brandrep, get_watches_by_filters, insert_watch_order, update_sell, \
     get_orders_by_customer_pk

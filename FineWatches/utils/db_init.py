@@ -1,6 +1,6 @@
 import psycopg2
 import os
-from choices import df
+from FineWatches.utils.choices import df
 
 from dotenv import load_dotenv
 
