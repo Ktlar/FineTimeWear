@@ -62,7 +62,7 @@ class Watches(ModelMixin):
         self.complications = watch_data.get('Complications')
         self.powerReserve = watch_data.get('Power Reserve')
         self.price = watch_data.get('price')
-        # From JOIN w/ Sell relation
+
         self.available = watch_data.get('available')
         self.brandrep_name = watch_data.get('brandrep_name')
         self.brandrep_pk = watch_data.get('brandrep_pk')
