@@ -22,7 +22,7 @@ def watch():
                                          brandrep_pk=request.form.get('brandrep_pk'),
                                          price=request.form.get('price'))
         title = f'Our {request.form.get("category")}!'
-    return render_template('pages/watches.html', watch=watch, form=form, title=title)
+    return render_template('collection.html', watch=watch, form=form, title=title)
 
 
 @Watch.route("/add-watch", methods=['GET', 'POST'])
@@ -40,7 +40,7 @@ def add_produce():
             new_watch_pk = insert_watch(watch)
             sell = Sell(dict(brandrep_pk=current_user.pk, watch_pk=new_watch_pk, available=True))
             insert_sell(sell)
-    return render_template('pages/add-watch.html', form=form)
+    return render_template('add-watch.html', form=form)
 
 
 @Watch.route("/your-watch", methods=['GET', 'POST'])
@@ -71,7 +71,7 @@ def buy_watch(pk):
             update_sell(available=False,
                         watch_pk=watch.pk,
                         brandrep_pk=watch.brandrep_pk)
-    return render_template('pages/buy-watch.html', form=form, watch=watch)
+    return render_template('buy-watch.html', form=form, watch=watch)
 
 
 @Watch.route('/watch/restock/<pk>', methods=['GET', 'POST'])
