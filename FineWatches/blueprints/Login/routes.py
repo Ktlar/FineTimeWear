@@ -39,22 +39,22 @@ Login = Blueprint('Login', __name__)
 
 
 @Login.route("/")
-@Login.route("/index")
+@Login.route("/index.html")
 def index():
     return render_template('index.html')
 
 
-@Login.route("/about")
+@Login.route("/about.html")
 def about():
     return render_template('about.html')
 
 
-@Login.route("/style-guide")
+@Login.route("/style-guide.html")
 def style_guide():
     return render_template('style-guide.html')
 
 
-@Login.route("/login", methods=['GET', 'POST'])
+@Login.route("/login.html", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('Login.index'))

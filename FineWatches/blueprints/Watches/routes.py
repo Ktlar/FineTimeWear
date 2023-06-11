@@ -10,7 +10,7 @@ from FineWatches.queries import insert_watch, get_watches_by_pk, Sell, \
 Watch = Blueprint('Watch', __name__)
 
 
-@Watch.route("/watch", methods=['GET', 'POST'])
+@Watch.route("/collection", methods=['GET', 'POST'])
 def watch():
     form = FilterWatchForm()
     title = 'Our watch!'
@@ -25,7 +25,7 @@ def watch():
     return render_template('collection.html', watch=watch, form=form, title=title)
 
 
-@Watch.route("/add-watch", methods=['GET', 'POST'])
+@Watch.route("/add_watch.html", methods=['GET', 'POST'])
 @login_required
 def add_produce():
     form = AddWatchForm(data=dict(brandrep_pk=current_user.pk))
@@ -40,7 +40,7 @@ def add_produce():
             new_watch_pk = insert_watch(watch)
             sell = Sell(dict(brandrep_pk=current_user.pk, watch_pk=new_watch_pk, available=True))
             insert_sell(sell)
-    return render_template('add-watch.html', form=form)
+    return render_template('add_watch.html', form=form)
 
 
 @Watch.route("/your-watch", methods=['GET', 'POST'])
@@ -57,7 +57,7 @@ def your_watch():
     return render_template('pages/your-watch.html', form=form, watch=watch)
 
 
-@Watch.route('/watch/buy/<pk>', methods=['GET', 'POST'])
+@Watch.route('/buy_watch.html', methods=['GET', 'POST'])
 @login_required
 def buy_watch(pk):
     form = BuyWatchForm()
@@ -71,7 +71,7 @@ def buy_watch(pk):
             update_sell(available=False,
                         watch_pk=watch.pk,
                         brandrep_pk=watch.brandrep_pk)
-    return render_template('buy-watch.html', form=form, watch=watch)
+    return render_template('buy_watch.html', form=form, watch=watch)
 
 
 @Watch.route('/watch/restock/<pk>', methods=['GET', 'POST'])

@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="with=device-width, initial-scale=1.0">
     <title>FineTime Wear Design</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="preconnect" href="https://fonts.gstatic.com"> 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -11,7 +11,7 @@
 <body>
 <section class="sub-header">
     <nav>
-        <a href="index.html"><img src="images/FineTime Wear.png"></a>
+        <a href="index.html"><img src="{{ url_for('static', filename='Images/FineTime Wear.png') }}"></a>
         <div class="nav-links" id="navLinks">
             <i class="fa fa-times"onclick="hideMenu()"></i>
             <ul>
@@ -36,19 +36,19 @@
 
     <div class="row">
         <div class="About-col">
-            <img src="images/omega.png">
+            <img src="{{ url_for('static', filename='Images/omega.png') }}">
             <div class="layer">
                 <a href="omega.html"><h3>OMEGA</h3></a>
             </div>
         </div>
         <div class="About-col">
-            <img src="images/Patek.png">
+            <img src="{{ url_for('static', filename='Images/Patek.png') }}">
             <div class="layer2">
                 <a href="patek.html"><h3>PATEK</h3></a>
             </div>
         </div>
         <div class="About-col">
-            <img src="images/rolex-daydate2.jpg">
+            <img src="{{ url_for('static', filename='Images/rolex-daydate2.jpg') }}">
             <div class="layer3">
                 <a href="rolex.html"><h3>ROLEX</h3></a>
             </div>
