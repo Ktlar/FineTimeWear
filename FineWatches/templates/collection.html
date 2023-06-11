@@ -20,7 +20,7 @@
             <ul>
                 <li><a href="index.html">HOME</a></li>
                 <li><a href="about.html">ABOUT</a></li>
-                <li><a href="collection.html">PRODUCTS</a></li>
+                <li><a href="collection.html">COLLECTION</a></li>
                 <li><a href="contact.html">CONTACT</a></li>
                 <li><a href="add_watch.html">CART</a></li>
                 <li><a href="login.html">LOGIN</a></li>
@@ -42,11 +42,11 @@
     <div class="watches">
         {% if watches|length %}
             {% for watch in watches %}
-                {{ watches_card(watch=watch) }}
+                {{ watches_card(watches=watches) }}
             {% endfor %}
         {% else %}
             <h3 class="text--gray">
-                No products found for selected filters
+                No watches found for selected filters
             </h3>
         {% endif %}
     </div>

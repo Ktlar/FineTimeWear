@@ -23,11 +23,11 @@ if __name__ == '__main__':
 
         # Import all produce from the dataset
         all_watches = list(
-            map(lambda x: tuple(x),
-                df[['Brand', 'Model', 'Case Material', 'Strap Material',
-                'Movement Type', 'Water Resistance', 'Case Diameter (mm)','Case Thickness (mm)',
-                'Band Width (mm)', 'Dial Color', 'Crystal Material', 'Complications',
-                'Power Reserve', 'Price (USD)']].to_records(index=False))
+            map(lambda x: tuple(x), df[['Brand', 'Model', 'Case Material',
+                'Strap Material','Movement Type', 'Water Resistance',
+                'Case Diameter (mm)','Case Thickness (mm)', 'Band Width (mm)',
+                'Dial Color', 'Crystal Material', 'Complications', 'Power Reserve',
+                'Price (USD)']].to_records(index=False))
                 )
         args_str = ','.join(cur.mogrify("(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", i).decode('utf-8') for i in all_watches)
         cur.execute("""

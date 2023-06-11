@@ -1,7 +1,7 @@
 from flask import render_template, request, Blueprint
 from flask_login import login_required, current_user
 
-from FineWatches.forms import FilterWatchForm, AddWatchForm, BuyWatchForm, RestockWatchForm
+from FineWatches.forms import FilterWatchForm, AddWatchForm, BuyWatchForm #,RestockWatchForm
 from FineWatches.models import Watches as WatchModel, WatchOrder
 from FineWatches.queries import insert_watch, get_watches_by_pk, Sell, \
     insert_sell, get_all_watches_by_brandrep, get_watches_by_filters, insert_watch_order, update_sell, \
@@ -24,7 +24,7 @@ def watch():
         title = f'Our {request.form.get("brand")}!'
     return render_template('collection.html', watches=watches, form=form, title=title)
 
-@Watch.route("/add_watch", methods=['GET', 'POST'])
+@Watch.route("/add_watch.html", methods=['GET', 'POST'])
 @login_required
 def add_produce():
     form = AddWatchForm(data=dict(brandrep_pk=current_user.pk))
@@ -72,7 +72,7 @@ def buy_watch(pk):
     return render_template('buy_watch.html', form=form, watch=watch)
 
 
-@Watch.route('/watch/restock/<pk>', methods=['GET', 'POST'])
+"""@Watch.route('/watch/restock/<pk>', methods=['GET', 'POST'])
 @login_required
 def restock_watch(pk):
     form = RestockWatchForm()
@@ -83,7 +83,7 @@ def restock_watch(pk):
                         watch_pk=watch.pk,
                         brandrep_pk=watch.brandrep_pk)
     return render_template('pages/restock-watch.html', form=form, watch=watch)
-
+"""
 
 @Watch.route('/watch/your-orders')
 def your_orders():
