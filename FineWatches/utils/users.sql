@@ -1,4 +1,6 @@
 DROP TABLE IF EXISTS Users CASCADE;
+DROP TABLE IF EXISTS BrandRep CASCADE;
+DROP TABLE IF EXISTS Customers;
 
 CREATE TABLE IF NOT EXISTS Users(
 	pk serial not null PRIMARY KEY,
@@ -12,8 +14,6 @@ ON Users (pk, user_name);
 
 DELETE FROM Users;
 
-DROP TABLE IF EXISTS BrandRep CASCADE;
-
 CREATE TABLE IF NOT EXISTS BrandRep(
     PRIMARY KEY(pk)
 ) INHERITS (Users);
@@ -26,7 +26,6 @@ DELETE FROM BrandRep;
 INSERT INTO BrandRep(user_name, full_name, password)
 VALUES ('brandrep', 'BrandRep', 'pass');
 
-DROP TABLE IF EXISTS Customers;
 
 CREATE TABLE IF NOT EXISTS Customers(
     PRIMARY KEY(pk)
