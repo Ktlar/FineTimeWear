@@ -25,7 +25,7 @@ def watch():
     return render_template('collection.html', watch=watch, form=form, title=title)
 
 
-@Watch.route("/add_watch.html", methods=['GET', 'POST'])
+@Watch.route("/add_watch", methods=['GET', 'POST'])
 @login_required
 def add_produce():
     form = AddWatchForm(data=dict(brandrep_pk=current_user.pk))

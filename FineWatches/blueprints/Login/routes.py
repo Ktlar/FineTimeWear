@@ -69,7 +69,7 @@ def login():
     return render_template('login.html', form=form)
 
 
-@Login.route("/signup", methods=['GET', 'POST'])
+@Login.route("/signup.html", methods=['GET', 'POST'])
 def signup():
     if current_user.is_authenticated:
         return redirect(url_for('Login.index'))
