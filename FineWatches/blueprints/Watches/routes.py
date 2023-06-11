@@ -10,7 +10,7 @@ from FineWatches.queries import insert_watch, get_watches_by_pk, Sell, \
 Watch = Blueprint('Watch', __name__)
 
 
-@Watch.route("/collection", methods=['GET', 'POST'])
+@Watch.route("/collection.html", methods=['GET', 'POST'])
 def watch():
     form = FilterWatchForm()
     title = 'Our watch!'

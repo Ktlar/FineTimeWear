@@ -27,7 +27,7 @@ class ModelMixin(dict):
 
 class User(ModelUserMixin):
     def __init__(self, user_data: Dict):
-        super(User, self).__init__(user_data)
+        super().__init__(user_data)
         self.pk = user_data.get('pk')
         self.full_name = user_data.get('full_name')
         self.user_name = user_data.get('user_name')
@@ -44,15 +44,9 @@ class BrandRep(User):
         super().__init__(user_data)
 
 
-if __name__ == '__main__':
-    user_data = dict(full_name='a', user_name='b', password='c')
-    user = BrandRep(user_data)
-    print(user)
-
-
 class Watches(ModelMixin):
     def __init__(self, watch_data: Dict):
-        super(Watches, self).__init__(watch_data)
+        super().__init__(watch_data)
         self.pk = watch_data.get('pk')
         self.brand = watch_data.get('brand')
         self.model = watch_data.get('model')
@@ -74,14 +68,27 @@ class Watches(ModelMixin):
         self.brandrep_pk = watch_data.get('brandrep_pk')
 
 
-
-
 class Sell(ModelMixin):
     def __init__(self, sell_data: Dict):
-        super(Sell, self).__init__(sell_data)
+        super().__init__(sell_data)
         self.available = sell_data.get('available')
         self.brandrep_pk = sell_data.get('brandrep_pk')
         self.watches_pk = sell_data.get('watches_pk')
+
+
+class WatchOrder(ModelMixin):
+    def __init__(self, watch_order_data: Dict):
+        super().__init__(watch_order_data)
+        self.pk = watch_order_data.get('pk')
+        self.customer_pk = watch_order_data.get('customer_pk')
+        self.brandrep_pk = watch_order_data.get('brandrep_pk')
+        self.watches_pk = watch_order_data.get('watches_pk')
+
+
+if __name__ == '__main__':
+    user_data = dict(full_name='a', user_name='b', password='c')
+    user = BrandRep(user_data)
+    print(user)
 
 
 class WatchOrder(ModelMixin):

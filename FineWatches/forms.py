@@ -115,8 +115,8 @@ class AddWatchForm(FlaskForm):
 
 
     def validate_price(self, field):
-        farmer = get_brandrep_by_pk(self.brandrep_pk.data)
-        if farmer is None:
+        brandrep = get_brandrep_by_pk(self.brandrep_pk.data)
+        if brandrep is None:
             raise ValidationError("You need to be an established brand to sell watches here")
 
 

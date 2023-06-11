@@ -57,7 +57,7 @@ def style_guide():
 @Login.route("/login.html", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('Login.index'))
+        return redirect(url_for('Login.index.html'))
     form = UserLoginForm()
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -65,7 +65,7 @@ def login():
             if user and user['password'] == form.password.data:
                 login_user(user, remember=True)
                 next_page = request.args.get('next')
-                return redirect(next_page) if next_page else redirect(url_for('Login.home'))
+                return redirect(next_page) if next_page else redirect(url_for('Login.index.html'))
     return render_template('login.html', form=form)
 
 
