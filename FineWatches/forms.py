@@ -56,9 +56,9 @@ class UserSignupForm(FlaskForm):
 
 
 class FilterWatchForm(FlaskForm):
-    category = SelectField('Brand',
+    brand = SelectField('Brand',
                            choices=WatchBrandChoices.choices())
-    item = SelectField('Model',
+    model = SelectField('Model',
                        choices=WatchModelChoices.choices())
     sold_by = StringField('Sold by')
     price = FloatField('Price (lower than or equal to)',

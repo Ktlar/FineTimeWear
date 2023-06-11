@@ -1,3 +1,5 @@
+{% include 'coolstuff.html' %}
+{% from 'coolstuff.html' import select_field, filter_watches_form, produce_card %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,11 +37,12 @@
     <h3 class="text--gray">
         Try filtering watches by your needs and see what you can find!
     </h3>
-    {{ filter_watch_form(form=form) }}
-    <div class="watch">
+    {{ filter_watches_form(form=form) }}
+    </form>
+    <div class="watches">
         {% if watches|length %}
-            {% for product in produce %}
-                {{ produce_card(product=product) }}
+            {% for watch in watches %}
+                {{ watches_card(watch=watch) }}
             {% endfor %}
         {% else %}
             <h3 class="text--gray">

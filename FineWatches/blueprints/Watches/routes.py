@@ -14,16 +14,15 @@ Watch = Blueprint('Watch', __name__)
 def watch():
     form = FilterWatchForm()
     title = 'Our watch!'
-    watch = []
+    watches = []
     if request.method == 'POST':
-        watch = get_watches_by_filters(brand=request.form.get('brand'),
+        watches = get_watches_by_filters(brand=request.form.get('brand'),
                                          model=request.form.get('model'),
                                          brandrep_name=request.form.get('brandrep_name'),
                                          brandrep_pk=request.form.get('brandrep_pk'),
                                          price=request.form.get('price'))
-        title = f'Our {request.form.get("category")}!'
-    return render_template('collection.html', watch=watch, form=form, title=title)
-
+        title = f'Our {request.form.get("brand")}!'
+    return render_template('collection.html', watches=watches, form=form, title=title)
 
 @Watch.route("/add_watch", methods=['GET', 'POST'])
 @login_required
@@ -47,15 +46,14 @@ def add_produce():
 @login_required
 def your_watch():
     form = FilterWatchForm()
-    watch = []
+    watches = []
     if request.method == 'GET':
-        watch = get_all_watches_by_brandrep(current_user.pk)
+        watches = get_all_watches_by_brandrep(current_user.pk)
     if request.method == 'POST':
-        watch = get_watches_by_filters(brand=request.form.get('brand'),
+        watches = get_watches_by_filters(brand=request.form.get('brand'),
                                          model=request.form.get('model'),
                                          brandrep_pk=current_user.pk)
-    return render_template('pages/your-watch.html', form=form, watch=watch)
-
+    return render_template('pages/your-watch.html', form=form, watches=watches)
 
 @Watch.route('/buy_watch.html', methods=['GET', 'POST'])
 @login_required
