@@ -1,4 +1,3 @@
-import os
 import pandas as pd
 
 DATASET_PATH = 'C:/Users/oliko/OneDrive/Dokumenter/GitHub/FineTimeWear/FineWatches/dataset/Luxury watch.csv'

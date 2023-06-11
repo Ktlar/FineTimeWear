@@ -1,21 +1,16 @@
-import os
-
 import psycopg2
-from dotenv import load_dotenv
 from flask import Flask
 from flask_login import LoginManager
 from psycopg2.extras import RealDictCursor
 
-load_dotenv()
-
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['SECRET_KEY'] = "abracadabra23456134668"
 
 conn = psycopg2.connect(
     host="localhost",
-    database=os.getenv('DB_NAME'),
-    user=os.getenv('DB_USERNAME'),
-    password=os.getenv('DB_PASSWORD')
+    database="FineWatches",
+    user="postgres",
+    password="eplavelta"
 )
 
 db_cursor = conn.cursor(cursor_factory=RealDictCursor)

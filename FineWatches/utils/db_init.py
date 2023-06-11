@@ -1,17 +1,12 @@
 import psycopg2
-import os
-from FineWatches.utils.choices import df
-
-from dotenv import load_dotenv
-
-load_dotenv()
+from choices import df
 
 if __name__ == '__main__':
     conn = psycopg2.connect(
         host="localhost",
-        database=os.getenv('DB_NAME'),
-        user=os.getenv('DB_USERNAME'),
-        password=os.getenv('DB_PASSWORD')
+        database="FineWatches",
+        user="postgres",
+        password="eplavelta"
     )
     with conn.cursor() as cur:
         # Run users.sql
