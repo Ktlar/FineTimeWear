@@ -3,163 +3,103 @@ from FineWatches.models import User, BrandRep, Customer, Watches, Sell, WatchOrd
 
 
 # INSERT QUERIES
-def insert_user(user: User):
-    sql = """
-    INSERT INTO Users(user_name, full_name, password)
-    VALUES (%s, %s, %s)
-    """
-    db_cursor.execute(sql, (user.user_name, user.full_name, user.password))
+def insert_record(table_name, **kwargs):
+    columns = ', '.join(kwargs.keys())
+    placeholders = ', '.join(['%s'] * len(kwargs))
+    values = tuple(kwargs.values())
+
+    sql = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
+    db_cursor.execute(sql, values)
     conn.commit()
+
+
+def insert_user(user: User):
+    insert_record("Users", user_name=user.user_name, full_name=user.full_name, password=user.password)
 
 
 def insert_brandrep(brandrep: BrandRep):
-    sql = """
-    INSERT INTO BrandRep(user_name, full_name, password)
-    VALUES (%s, %s, %s)
-    """
-    db_cursor.execute(sql, (brandrep.user_name, brandrep.full_name, brandrep.password))
-    conn.commit()
+    insert_record("BrandRep", user_name=brandrep.user_name, full_name=brandrep.full_name, password=brandrep.password)
+
 
 def insert_customer(customer: Customer):
-    sql = """
-    INSERT INTO Customers(user_name, full_name, password)
-    VALUES (%s, %s, %s)
-    """
-    db_cursor.execute(sql, (customer.user_name, customer.full_name, customer.password))
-    conn.commit()
+    insert_record("Customers", user_name=customer.user_name, full_name=customer.full_name, password=customer.password)
+
 
 def insert_watch(watch: Watches):
-    sql = """
-    INSERT INTO Watches(brand, model, "Case Material", "Strap Material", "Movement Type",
-    "Water Resistance", "Case Diameter", "Case Thickness", "Band Width", "Dial Color",
-    "Crystal Material", "Complications", "Power Reserve", price)
-    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) RETURNING pk
-    """
-    db_cursor.execute(sql, (
-        watch.brand,
-        watch.model,
-        watch["Case Material"],
-        watch["Strap Material"],
-        watch["Movement Type"],
-        watch["Water Resistance"],
-        watch["Case Diameter"],
-        watch["Case Thickness"],
-        watch["Band Width"],
-        watch["Dial Color"],
-        watch["Crystal Material"],
-        watch.Complications,
-        watch["Power Reserve"],
-        watch.price      
-    ))
-    
-    conn.commit()
-    return db_cursor.fetchone().get('pk') if db_cursor.rowcount > 0 else None
+    insert_record("Watches", brand=watch.brand, model=watch.model, **watch.attributes, price=watch.price)
 
 
 def insert_sell(sell: Sell):
-    sql = """
-    INSERT INTO Sell(brandrep_pk, watches_pk)
-    VALUES (%s, %s)
-    """
-    db_cursor.execute(sql, (sell.brandrep_pk, sell.watches_pk,))
-    conn.commit()
+    insert_record("Sell", brandrep_pk=sell.brandrep_pk, watches_pk=sell.watches_pk)
+
 
 def insert_watch_order(order: WatchOrder):
-    sql = """
-    INSERT INTO ProduceOrder(watches_pk, brandrep_pk, customer_pk)
-    VALUES (%s, %s, %s)
-    """
-    db_cursor.execute(sql, (
-        order.watches_pk,
-        order.brandrep_pk,
-        order.customer_pk,
-    ))
-    
+    insert_record("ProduceOrder", watches_pk=order.watches_pk, brandrep_pk=order.brandrep_pk, customer_pk=order.customer_pk)
 
 
 # SELECT QUERIES
+def execute_select_query(sql, *params):
+    db_cursor.execute(sql, params)
+    results = db_cursor.fetchall()
+    return results
+
+
 def get_user_by_pk(pk):
-    sql = """
-    SELECT * FROM Users
-    WHERE pk = %s
-    """
-    db_cursor.execute(sql, (pk,))
-    user = User(db_cursor.fetchone()) if db_cursor.rowcount > 0 else None
-    return user
+    sql = "SELECT * FROM Users WHERE pk = %s"
+    results = execute_select_query(sql, pk)
+    return User(results[0]) if results else None
 
 
 def get_brandrep_by_pk(pk):
-    sql = """
-    SELECT * FROM BrandRep
-    WHERE pk = %s
-    """
-    db_cursor.execute(sql, (pk,))
-    brandrep = BrandRep(db_cursor.fetchone()) if db_cursor.rowcount > 0 else None
-    return brandrep
+    sql = "SELECT * FROM BrandRep WHERE pk = %s"
+    results = execute_select_query(sql, pk)
+    return BrandRep(results[0]) if results else None
 
-def get_watches_by_filters(brand=None, model=None,
-                           brandrep_pk=None, brandrep_name=None, price=None):
-    sql = """
-    SELECT * FROM vw_watches
-    WHERE
-    """
+
+def get_watches_by_filters(brand=None, model=None, brandrep_pk=None, brandrep_name=None, price=None):
     conditionals = []
     if brand:
-        conditionals.append(f"brand='{brand}'")
+        conditionals.append("brand = %s")
     if model:
-        conditionals.append(f"model='{model}'")
+        conditionals.append("model = %s")
     if brandrep_pk:
-        conditionals.append(f"brandrep_pk = '{brandrep_pk}'")
+        conditionals.append("brandrep_pk = %s")
     if brandrep_name:
-        conditionals.append(f"brandrep_name LIKE '%{brandrep_name}%'")
+        conditionals.append("brandrep_name LIKE %s")
     if price:
-        conditionals.append(f"price <= {price}")
+        conditionals.append("price <= %s")
 
-    args_str = ' AND '.join(conditionals)
-    order = " ORDER BY price "
-    db_cursor.execute(sql + args_str + order)
-    watches = [Watches(res) for res in db_cursor.fetchall()] if db_cursor.rowcount > 0 else []
-    return watches
+    args = [arg for arg in (brand, model, brandrep_pk, f"%{brandrep_name}%", price) if arg is not None]
+    conditions = " AND ".join(conditionals)
+    order_by = "ORDER BY price"
+
+    sql = f"SELECT * FROM vw_watches WHERE {conditions} {order_by}"
+    results = execute_select_query(sql, *args)
+    return [Watches(res) for res in results]
 
 
 def get_customer_by_pk(pk):
-    sql = """
-    SELECT * FROM Customers
-    WHERE pk = %s
-    """
-    db_cursor.execute(sql, (pk,))
-    customer = Customer(db_cursor.fetchone()) if db_cursor.rowcount > 0 else None
-    return customer
+    sql = "SELECT * FROM Customers WHERE pk = %s"
+    results = execute_select_query(sql, pk)
+    return Customer(results[0]) if results else None
+
 
 def get_watches_by_pk(pk):
-    sql = """
-    SELECT watches_pk as pk, * FROM vw_watches
-    WHERE watches_pk = %s
-    """
-    db_cursor.execute(sql, (pk,))
-    watches = Watches(db_cursor.fetchone()) if db_cursor.rowcount > 0 else None
-    return watches
+    sql = "SELECT watches_pk as pk, * FROM vw_watches WHERE watches_pk = %s"
+    results = execute_select_query(sql, pk)
+    return Watches(results[0]) if results else None
 
 
 def get_all_watches_by_brandrep(pk):
-    sql = """
-    SELECT * FROM vw_watches
-    WHERE brandrep_pk = %s
-    ORDER BY available DESC, price
-    """
-    db_cursor.execute(sql, (pk,))
-    watches = [Watches(res) for res in db_cursor.fetchall()] if db_cursor.rowcount > 0 else []
-    return watches
+    sql = "SELECT * FROM vw_watches WHERE brandrep_pk = %s ORDER BY available DESC, price"
+    results = execute_select_query(sql, pk)
+    return [Watches(res) for res in results]
 
 
 def get_user_by_user_name(user_name):
-    sql = """
-    SELECT * FROM Users
-    WHERE user_name = %s
-    """
-    db_cursor.execute(sql, (user_name,))
-    user = User(db_cursor.fetchone()) if db_cursor.rowcount > 0 else None
-    return user
+    sql = "SELECT * FROM Users WHERE user_name = %s"
+    results = execute_select_query(sql, user_name)
+    return User(results[0]) if results else None
 
 
 def get_all_watches():
@@ -170,20 +110,15 @@ def get_all_watches():
     FROM vw_watches
     ORDER BY available DESC, price
     """
-    db_cursor.execute(sql)
-    watches = [Watches(res) for res in db_cursor.fetchall()] if db_cursor.rowcount > 0 else []
-    return watches
+    results = execute_select_query(sql)
+    return [Watches(res) for res in results]
 
 
 def get_available_watches():
-    sql = """
-    SELECT * FROM vw_watches
-    WHERE available = true
-    ORDER BY price  
-    """
-    db_cursor.execute(sql)
-    watches = [Watches(res) for res in db_cursor.fetchall()] if db_cursor.rowcount > 0 else []
-    return watches
+    sql = "SELECT * FROM vw_watches WHERE available = true ORDER BY price"
+    results = execute_select_query(sql)
+    return [Watches(res) for res in results]
+
 
 def get_orders_by_customer_pk(pk):
     sql = """
@@ -191,9 +126,8 @@ def get_orders_by_customer_pk(pk):
     JOIN Watches w ON w.pk = wo.produce_pk
     WHERE customer_pk = %s
     """
-    db_cursor.execute(sql, (pk,))
-    orders = [WatchOrder(res) for res in db_cursor.fetchall()] if db_cursor.rowcount > 0 else []
-    return orders
+    results = execute_select_query(sql, pk)
+    return [WatchOrder(res) for res in results]
 
 
 # UPDATE QUERIES
@@ -206,5 +140,3 @@ def update_sell(available, watches_pk, brandrep_pk):
     """
     db_cursor.execute(sql, (available, watches_pk, brandrep_pk))
     conn.commit()
-
-
