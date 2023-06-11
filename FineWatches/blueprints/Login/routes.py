@@ -20,9 +20,17 @@ def about():
     return render_template('about.html')
 
 
-@Login.route("/style-guide.html")
-def style_guide():
-    return render_template('style-guide.html')
+@Login.route("/omega.html")
+def omega():
+    return render_template('omega.html')
+
+@Login.route("/patek.html")
+def patek():
+    return render_template('patek.html')
+
+@Login.route("/rolex.html")
+def rolex():
+    return render_template('rolex.html')
 
 
 @Login.route("/login.html", methods=['GET', 'POST'])
